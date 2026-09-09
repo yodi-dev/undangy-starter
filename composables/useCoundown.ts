@@ -6,8 +6,8 @@ export function useCountdown(targetDate: string) {
 
   function update() {
     const diff = new Date(targetDate).getTime() - Date.now()
-    days.value    = Math.floor(diff / 86400000)
-    hours.value   = Math.floor((diff % 86400000) / 3600000)
+    days.value = Math.floor(diff / 86400000)
+    hours.value = Math.floor((diff % 86400000) / 3600000)
     minutes.value = Math.floor((diff % 3600000) / 60000)
     seconds.value = Math.floor((diff % 60000) / 1000)
   }

@@ -48,7 +48,6 @@ import { invitation } from '~/data/invitation'
 const showInvitation = ref(false)
 
 useSeoMeta(invitation.seo)
-
 </script>
 
 <style scoped>
