@@ -1,16 +1,16 @@
 <template>
   <section ref="landingRef"
     class="relative flex justify-center h-screen bg-no-repeat bg-cover bg-[center_80%] md:bg-[center_35%]"
-    style="background-image: url('/images/landing.webp')">
+    :style="{ backgroundImage: `url(${bgImage || '/images/landing.webp'})` }">
     <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/10 to-red-950/90 z-0"></div>
 
     <!-- Content -->
     <div class="relative grid place-content-between text-center rounded-3xl max-w-lg animate-fade-in py-20">
       <div>
-        <p class="font-second text-xl">The Wedding Of</p>
+        <p class="font-second text-xl">{{ couple?.title }}</p>
         <h1 class="text-5xl font-heading font-bold tracking-wide mt-5">
-          Desti & Reza
+          {{ couple?.shortName }}
         </h1>
       </div>
       <div>
@@ -36,6 +36,17 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+
+defineProps({
+  couple: {
+    type: Object,
+    default: null
+  },
+  bgImage: {
+    type: String,
+    default: '/images/landing.webp'
+  }
+})
 
 const guestName = ref('Tamu Undangan')
 const emit = defineEmits(['open'])

@@ -21,13 +21,20 @@
         </button>
 
         <audio ref="audioRef" loop preload="auto" autoplay>
-            <source src="../public/audio/bg-music.mp3" type="audio/mpeg" />
+            <source :src="audio?.src || '/audio/bg-music.mp3'" type="audio/mpeg" />
         </audio>
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
+
+defineProps({
+    audio: {
+        type: Object,
+        default: null
+    }
+})
 
 const audioRef = ref(null)
 const isPlaying = ref(true)

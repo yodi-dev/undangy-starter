@@ -2,10 +2,9 @@
   <section id="gift" class="py-20">
     <div class="max-w-2xl mx-auto px-4 text-center space-y-10">
       <div>
-        <h2 class="text-4xl font-bold mb-5 font-heading">Wedding Gift</h2>
+        <h2 class="text-4xl font-bold mb-5 font-heading">{{ gift?.title }}</h2>
         <p class="text-base font-body">
-          Doa dan restu Anda adalah hadiah terbaik. Namun jika berkenan berbagi kasih, berikut adalah informasi rekening
-          kami:
+          {{ gift?.message }}
         </p>
       </div>
 
@@ -42,11 +41,16 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const banks = ref([
-  { name: 'Bank BCA', account: '7455190011', owner: 'Desti Amalia' },
-])
+const props = defineProps({
+  gift: {
+    type: Object,
+    default: null
+  }
+})
+
+const banks = computed(() => props.gift?.banks || [])
 
 const toast = ref({
   visible: false,

@@ -1,13 +1,14 @@
 <template>
-  <section class="relative h-screen w-full overflow-hidden bg-[url('/images/7.webp')] bg-cover custom-position">
+  <section class="relative h-screen w-full overflow-hidden bg-cover custom-position"
+    :style="{ backgroundImage: `url(${bgImage || '/images/7.webp'})` }">
     <!-- overlay gelap tipis -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/10 to-red-950 z-0"></div>
 
     <div class="relative grid place-content-between justify-center h-full text-center px-4 py-20">
       <div>
-        <p class="font-second text-xl">The Wedding Of</p>
-        <h1 class="font-heading text-5xl font-semibold sm:text-6xl mt-5">Desti & Reza</h1>
-        <p class="font-second text-base sm:text-lg">Sabtu, 26 Juli 2025</p>
+        <p class="font-second text-xl">{{ couple?.title }}</p>
+        <h1 class="font-heading text-5xl font-semibold sm:text-6xl mt-5">{{ couple?.shortName }}</h1>
+        <p class="font-second text-base sm:text-lg">{{ countdown?.dateText }}</p>
       </div>
       <div>
         <p class="font-heading text-3xl mb-3">Countdown Timer</p>
@@ -28,12 +29,30 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from 'vue'
 
-const target = new Date('2025-07-26T09:00:00+07:00').getTime()
+const props = defineProps({
+  couple: {
+    type: Object,
+    default: null
+  },
+  countdown: {
+    type: Object,
+    default: null
+  },
+  bgImage: {
+    type: String,
+    default: ''
+  }
+})
+
+const target = computed(() => {
+  if (!props.countdown?.targetDate) return 0
+  return new Date(props.countdown.targetDate).getTime()
+})
 const days = ref(0), hours = ref(0), minutes = ref(0), seconds = ref(0)
 let timer
 
 function update() {
-  const diff = target - Date.now()
+  const diff = target.value - Date.now()
   days.value = Math.max(Math.floor(diff / (1000 * 60 * 60 * 24)), 0)
   hours.value = Math.max(Math.floor((diff / (1000 * 60 * 60)) % 24), 0)
   minutes.value = Math.max(Math.floor((diff / (1000 * 60)) % 60), 0)

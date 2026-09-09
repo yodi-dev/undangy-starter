@@ -25,15 +25,21 @@ export default defineNuxtConfig({
 		prefetch: true,
 		preconnect: true,
 	  },
+	runtimeConfig: {
+		public: {
+			supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
+			supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY || '',
+		},
+	},
 	devtools: { enabled: true },
 	compatibilityDate: "2024-11-01",
 	eslint: {
 		config: {
 			stylistic: {
-				semi: true,
-				quotes: "double",
+				semi: false,
+				quotes: "single",
 				commaDangle: "always-multiline",
-				indent: "tab",
+				indent: 2,
 			},
 		},
 	},

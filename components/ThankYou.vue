@@ -2,45 +2,57 @@
   <section class="bg-rose-100 text-red-950 py-16 px-6 text-center space-y-8" id="closing">
     <!-- Judul Terima Kasih -->
     <div class="space-y-2">
-      <h2 class="text-3xl md:text-4xl font-heading font-bold">Terima Kasih</h2>
+      <h2 class="text-3xl md:text-4xl font-heading font-bold">{{ closing?.title }}</h2>
       <p class="max-w-xl mx-auto text-sm md:text-base text-red-800">
-        Terima kasih atas doa dan restu yang telah diberikan kepada kami. Semoga cinta dan kebahagiaan
-        selalu menyertai langkah kita semua.
+        {{ closing?.message }}
       </p>
     </div>
 
     <!-- Foto Mempelai -->
     <div class="max-w-md mx-auto">
-      <img src="/images/3.webp" alt="Foto Mempelai" class="rounded-xl shadow-lg w-full object-cover" />
+      <img :src="closing?.photo" alt="Foto Mempelai" class="rounded-xl shadow-lg w-full object-cover" />
     </div>
 
     <!-- Kalimat "Kami yang Berbahagia" -->
     <div class="space-y-1">
-      <p class="text-xs uppercase tracking-widest text-red-600">Kami yang berbahagia</p>
-      <h2 class="text-2xl md:text-3xl font-heading font-bold">Desti & Reza</h2>
+      <p class="text-xs uppercase tracking-widest text-red-600">{{ closing?.coupleText }}</p>
+      <h2 class="text-2xl md:text-3xl font-heading font-bold">{{ couple?.shortName }}</h2>
     </div>
 
     <!-- Footer -->
     <footer class="mt-12 text-xs text-red-700 space-y-2">
       <!-- Atribusi Musik -->
-      <p class="italic">
-        Musik: "You'll Be in My Heart" - Niki – Phil Collins. <br> Digunakan untuk kepentingan non-komersial.
+      <p class="italic whitespace-pre-line">
+        {{ closing?.musicAttribution }}
       </p>
 
       <!-- Atribusi Icon -->
       <p>
-        Ikon oleh <a href="https://www.freepik.com" target="_blank" rel="noopener noreferrer"
-          class="underline hover:text-red-900">Freepik</a>
+        {{ closing?.iconAttribution?.text }} <a :href="closing?.iconAttribution?.url" target="_blank" rel="noopener noreferrer"
+          class="underline hover:text-red-900">{{ closing?.iconAttribution?.author }}</a>
       </p>
 
       <!-- Credit Developer -->
       <p class="text-red-800 font-medium">
-        Made with ♥ by <a href="https://awan-dev.site" class="underline hover:text-red-900"
-          target="_blank">awan-dev.site</a>
+        {{ closing?.developerCredit?.text }} <a :href="closing?.developerCredit?.url" class="underline hover:text-red-900"
+          target="_blank">{{ closing?.developerCredit?.author }}</a>
       </p>
     </footer>
   </section>
 </template>
+
+<script setup>
+defineProps({
+  couple: {
+    type: Object,
+    default: null
+  },
+  closing: {
+    type: Object,
+    default: null
+  }
+})
+</script>
 
 <style scoped>
 #closing {

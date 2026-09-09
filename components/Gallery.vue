@@ -1,7 +1,7 @@
 <template>
   <section id="gallery" class="py-20 font-body bg-gradient-to-b from-red-950 to-white">
     <h2 class="text-4xl font-bold font-heading text-center mb-12 tracking-wide">
-      Galeri Kami
+      {{ gallery?.title }}
     </h2>
     <div class="max-w-6xl mx-auto px-4">
 
@@ -52,36 +52,34 @@
 <script setup>
 import { Splide, SplideSlide } from '@splidejs/vue-splide'
 import '@splidejs/vue-splide/css'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import VueEasyLightbox from 'vue-easy-lightbox'
 
-// Portrait images (grouped into slides of 2)
-const portraitImages = [
-  { src: '/images/2.webp', alt: 'Potret Mempelai' },
-  { src: '/images/3.webp', alt: 'Potret Mempelai' },
-  { src: '/images/4.webp', alt: 'Potret Mempelai' },
-  { src: '/images/5.webp', alt: 'Potret Mempelai' },
-  { src: '/images/6.webp', alt: 'Potret Mempelai' },
-  { src: '/images/10.webp', alt: 'Potret Mempelai' },
-  { src: '/images/13.webp', alt: 'Potret Mempelai' },
-  { src: '/images/14.webp', alt: 'Potret Mempelai' },
-]
-const portraitSlides = []
-for (let i = 0; i < portraitImages.length; i += 2) {
-  portraitSlides.push(portraitImages.slice(i, i + 2))
-}
+const props = defineProps({
+  gallery: {
+    type: Object,
+    default: null
+  }
+})
+
+const portraitImages = computed(() => props.gallery?.portrait || [])
+const landscapeImages = computed(() => props.gallery?.landscape || [])
+
+const portraitSlides = computed(() => {
+  const slides = []
+  const list = portraitImages.value
+  for (let i = 0; i < list.length; i += 2) {
+    slides.push(list.slice(i, i + 2))
+  }
+  return slides
+})
+
 const lightbox = ref({ visible: false, index: 0 })
 const showLightboxFromPortrait = (index) => {
   lightbox.value.index = index
   lightbox.value.visible = true
 }
 
-// Landscape images
-const landscapeImages = [
-  { src: '/images/1.webp', alt: 'Potret Mempelai' },
-  { src: '/images/7.webp', alt: 'Potret Mempelai' },
-  { src: '/images/8.webp', alt: 'Potret Mempelai' },
-]
 const landscapeLightbox = ref({ visible: false, index: 0 })
 const showLightboxFromLandscape = (index) => {
   landscapeLightbox.value.index = index

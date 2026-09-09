@@ -1,18 +1,30 @@
 <template>
   <div class="bg-red-950 text-red-50">
-    <Landing v-if="!showInvitation" @open="showInvitation = true" />
+    <Landing
+      v-if="!showInvitation"
+      :couple="invitation.couple"
+      :bg-image="invitation.assets.landingBg"
+      @open="showInvitation = true"
+    />
 
     <template v-else>
-      <Countdown />
-      <AyatArRum />
-      <BridgeGroum />
-      <LoveStory />
-      <Event />
-      <Gallery />
-      <Gift />
+      <Countdown
+        :couple="invitation.couple"
+        :countdown="invitation.countdown"
+        :bg-image="invitation.assets.countdownBg"
+      />
+      <AyatArRum :quote="invitation.quote" />
+      <BridgeGroum :couple="invitation.couple" />
+      <LoveStory :story="invitation.loveStory" />
+      <Event :events="invitation.events" />
+      <Gallery :gallery="invitation.gallery" />
+      <Gift :gift="invitation.gift" />
       <BlessingForm />
-      <ThankYou />
-      <AudioPlayer />
+      <ThankYou
+        :couple="invitation.couple"
+        :closing="invitation.closing"
+      />
+      <AudioPlayer :audio="invitation.audio" />
     </template>
   </div>
 </template>
@@ -31,20 +43,11 @@ import ThankYou from '~/components/ThankYou.vue'
 import AudioPlayer from '~/components/AudioPlayer.vue'
 
 import { ref } from 'vue'
+import { invitation } from '~/data/invitation'
 
 const showInvitation = ref(false)
 
-useSeoMeta({
-  title: 'Desti & Reza Wedding - awan-dev.site',
-  description: 'Undangan pernikahan resmi Reza & Desti. Temukan informasi acara, RSVP, lokasi, dan hitung mundur pernikahan kami.',
-  ogTitle: 'Desti & Reza Wedding - awan-dev.site',
-  ogDescription: 'Kami mengundang Anda untuk hadir di hari bahagia kami.',
-  ogImage: 'https://undangan-reza.vercel.app/images/1.jpg',
-  ogImageWidth: '1200',
-  ogImageHeight: '630',
-  ogUrl: 'https://undangan-reza.vercel.app',
-  twitterCard: 'summary_large_image'
-})
+useSeoMeta(invitation.seo)
 
 </script>
 
