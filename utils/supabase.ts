@@ -1,21 +1,23 @@
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 
-let _supabaseClient: SupabaseClient | null = null
+let client: SupabaseClient | null = null
 
-export const getSupabase = (): SupabaseClient => {
-  if (!_supabaseClient) {
+export function getSupabaseClient(): SupabaseClient {
+  if (!client) {
     const config = useRuntimeConfig()
-    const url = config.public.supabaseUrl as string
-    const key = config.public.supabaseKey as string
-    _supabaseClient = createClient(url, key)
+    const url = (config.public.supabaseUrl as string) || ''
+    const key = (config.public.supabaseKey as string) || ''
+
+    if (!url || !key) {
+      console.warn(
+        '[Supabase] Supabase URL atau Key kosong. Pastikan NUXT_PUBLIC_SUPABASE_URL dan NUXT_PUBLIC_SUPABASE_KEY terisi di .env',
+      )
+    }
+
+    client = createClient(url, key)
   }
-  return _supabaseClient
+  return client
 }
 
-export const supabase = new Proxy({} as SupabaseClient, {
-  get(_target, prop, receiver) {
-    const client = getSupabase()
-    const value = Reflect.get(client, prop, receiver)
-    return typeof value === 'function' ? value.bind(client) : value
-  },
-})
+// Alias for backwards compatibility
+export { getSupabaseClient as getSupabase }

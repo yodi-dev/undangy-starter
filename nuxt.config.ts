@@ -18,8 +18,10 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL || '',
-      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY || '',
+      supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL
+        || '',
+      supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY
+        || '',
     },
   },
   compatibilityDate: '2024-11-01',

@@ -50,7 +50,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref } from 'vue'
+import { useGuest } from '~/composables/useGuest'
+import { useAudio } from '~/composables/useAudio'
 
 defineProps({
   couple: {
@@ -63,26 +65,19 @@ defineProps({
   },
 })
 
-const guestName = ref('Tamu Undangan')
 const emit = defineEmits(['open'])
 const landingRef = ref(null)
 
-onMounted(() => {
-  if (typeof window !== 'undefined' && window.location.hash) {
-    const hash = decodeURIComponent(window.location.hash.substring(1))
-    if (hash) {
-      guestName.value = hash
-        .replace(/-/g, ' ')
-        .replace(/\b\w/g, c => c.toUpperCase())
-    }
-  }
-})
+const { guestName } = useGuest()
+const { play } = useAudio()
 
 const openInvitation = () => {
-  landingRef.value.classList.add('opacity-0')
+  if (landingRef.value) {
+    landingRef.value.classList.add('opacity-0')
+  }
+  play()
   setTimeout(() => {
     emit('open')
-    window.dispatchEvent(new Event('play-music'))
   }, 100)
 }
 </script>

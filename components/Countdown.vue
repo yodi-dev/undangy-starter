@@ -42,7 +42,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue'
+import { computed } from 'vue'
+import { useCountdown } from '~/composables/useCountdown'
 
 const props = defineProps({
   couple: {
@@ -59,20 +60,7 @@ const props = defineProps({
   },
 })
 
-const target = computed(() => {
-  if (!props.countdown?.targetDate) return 0
-  return new Date(props.countdown.targetDate).getTime()
-})
-const days = ref(0), hours = ref(0), minutes = ref(0), seconds = ref(0)
-let timer
-
-function update() {
-  const diff = target.value - Date.now()
-  days.value = Math.max(Math.floor(diff / (1000 * 60 * 60 * 24)), 0)
-  hours.value = Math.max(Math.floor((diff / (1000 * 60 * 60)) % 24), 0)
-  minutes.value = Math.max(Math.floor((diff / (1000 * 60)) % 60), 0)
-  seconds.value = Math.max(Math.floor((diff / 1000) % 60), 0)
-}
+const { days, hours, minutes, seconds } = useCountdown(() => props.countdown?.targetDate)
 
 const countdownItems = computed(() => [
   { label: 'Hari', value: days.value },
@@ -80,12 +68,6 @@ const countdownItems = computed(() => [
   { label: 'Menit', value: minutes.value },
   { label: 'Detik', value: seconds.value },
 ])
-
-onMounted(() => {
-  update()
-  timer = setInterval(update, 1000)
-})
-onUnmounted(() => clearInterval(timer))
 </script>
 
 <style scoped>

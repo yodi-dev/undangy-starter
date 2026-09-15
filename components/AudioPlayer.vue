@@ -2,7 +2,7 @@
   <div class="fixed bottom-5 right-5 z-50">
     <button
       class="bg-white text-gray-700 p-2 rounded-full shadow-md hover:bg-gray-100 transition"
-      @click="toggleMusic"
+      @click="toggle"
     >
       <span v-if="isPlaying">
         <!-- Icon suara aktif -->
@@ -39,7 +39,8 @@
       ref="audioRef"
       loop
       preload="auto"
-      autoplay
+      @play="isPlaying = true"
+      @pause="isPlaying = false"
     >
       <source
         :src="audio?.src || '/audio/bg-music.mp3'"
@@ -50,7 +51,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted, onUnmounted } from 'vue'
+import { useAudio } from '~/composables/useAudio'
 
 defineProps({
   audio: {
@@ -59,32 +61,17 @@ defineProps({
   },
 })
 
-const audioRef = ref(null)
-const isPlaying = ref(true)
+const { isPlaying, audioRef, play, toggle } = useAudio()
 
-const toggleMusic = () => {
-  if (!audioRef.value) return
-
-  if (audioRef.value.paused) {
-    audioRef.value.play()
-    isPlaying.value = true
+onMounted(async () => {
+  if (isPlaying.value && audioRef.value) {
+    await play()
   }
-  else {
+})
+
+onUnmounted(() => {
+  if (audioRef.value) {
     audioRef.value.pause()
-    isPlaying.value = false
   }
-}
-
-onMounted(() => {
-  window.addEventListener('play-music', async () => {
-    if (!audioRef.value) return
-    try {
-      await audioRef.value.play()
-      isPlaying.value = true
-    }
-    catch (err) {
-      console.log('Autoplay gagal:', err)
-    }
-  })
 })
 </script>

@@ -68,9 +68,10 @@
           </div>
           <button
             type="submit"
-            class="w-full py-3 bg-red-900 text-white font-semibold rounded-xl hover:bg-red-950 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-300"
+            :disabled="isSubmitting"
+            class="w-full py-3 bg-red-900 text-white font-semibold rounded-xl hover:bg-red-950 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-rose-300 disabled:opacity-50"
           >
-            Kirim Ucapan
+            {{ isSubmitting ? 'Mengirim...' : 'Kirim Ucapan' }}
           </button>
         </form>
       </div>
@@ -81,17 +82,17 @@
           Ucapan & Kehadiran
         </h3>
         <div
-          v-if="entries.length === 0"
+          v-if="wishes.length === 0"
           class="text-center italic text-rose-300"
         >
-          Belum ada ucapan yang masuk.
+          {{ isLoading ? 'Memuat ucapan...' : 'Belum ada ucapan yang masuk.' }}
         </div>
         <ul
           v-else
           class="space-y-4"
         >
           <li
-            v-for="(entry, index) in entries"
+            v-for="(entry, index) in wishes"
             :key="index"
             class="bg-white p-5 rounded-xl shadow border border-red-100 flex items-start gap-3 text-red-950"
           >
@@ -157,49 +158,28 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { supabase } from '@/utils/supabase'
+import { ref, onMounted } from 'vue'
+import { useGuestbook } from '~/composables/useGuestbook'
+
+const { wishes, isLoading, isSubmitting, fetchWishes, submitWish } = useGuestbook()
 
 const form = ref({ name: '', attending: '', message: '' })
-const entries = ref([])
-
 const toast = ref({ visible: false, message: '' })
 
-async function submitForm() {
-  const { error } = await supabase.from('guestbook').insert([{
-    name: form.value.name,
-    attending: form.value.attending,
-    message: form.value.message,
-    created_at: new Date().toISOString(),
-  }])
+const submitForm = async () => {
+  const success = await submitWish(form.value)
 
-  if (error) {
+  if (!success) {
     toast.value = { visible: true, message: 'Gagal mengirim ucapan!' }
-    console.error(error)
     return
   }
 
   toast.value = { visible: true, message: 'Ucapan berhasil dikirim!' }
   form.value = { name: '', attending: '', message: '' }
-  fetchEntries()
-}
-
-async function fetchEntries() {
-  const { data, error } = await supabase
-    .from('guestbook')
-    .select('*')
-    .order('created_at', { ascending: false })
-
-  if (error) {
-    console.error('Gagal ambil data:', error)
-    return
-  }
-
-  entries.value = data
 }
 
 onMounted(() => {
-  fetchEntries()
+  fetchWishes()
 })
 </script>
 
