@@ -1,11 +1,19 @@
 <template>
   <ThemesMaroonShell>
-    <ThemesMaroonCover v-if="!showInvitation" :couple="invitation.couple" :bg-image="invitation.assets.landingBg"
-      @open="showInvitation = true" />
+    <ThemesMaroonCover
+      v-if="!showInvitation"
+      :couple="invitation.couple"
+      :countdown="invitation.countdown"
+      :bg-image="invitation.assets.landingBg"
+      @open="showInvitation = true"
+    />
 
     <template v-else>
-      <ThemesMaroonCountdown :couple="invitation.couple" :countdown="invitation.countdown"
-        :bg-image="invitation.assets.countdownBg" />
+      <ThemesMaroonCountdown
+        :couple="invitation.couple"
+        :countdown="invitation.countdown"
+        :bg-image="invitation.assets.countdownBg"
+      />
       <ThemesMaroonQuote :quote="invitation.quote" />
       <ThemesMaroonCouple :couple="invitation.couple" />
       <ThemesMaroonStory :story="invitation.loveStory" />
@@ -13,7 +21,10 @@
       <ThemesMaroonGallery :gallery="invitation.gallery" />
       <ThemesMaroonGift :gift="invitation.gift" />
       <ThemesMaroonWishes />
-      <ThemesMaroonClosing :couple="invitation.couple" :closing="invitation.closing" />
+      <ThemesMaroonClosing
+        :couple="invitation.couple"
+        :closing="invitation.closing"
+      />
       <SharedAudioPlayer :audio="invitation.audio" />
     </template>
   </ThemesMaroonShell>

@@ -43,6 +43,7 @@ export default defineNuxtConfig({
       'Great Vibes': [400],
       'Montserrat': [400, 500, 600],
       'Koh Santepheap': [300, 400, 700],
+      'Cormorant Garamond': [400, 500, 600, 700],
     },
     display: 'swap',
     prefetch: true,
