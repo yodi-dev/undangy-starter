@@ -19,8 +19,11 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL
+        || process.env.NEXT_PUBLIC_SUPABASE_URL
         || '',
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY
+        || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+        || process.env.NEXT_PUBLIC_SUPABASE_KEY
         || '',
     },
   },
@@ -38,8 +41,8 @@ export default defineNuxtConfig({
   googleFonts: {
     families: {
       'Great Vibes': [400],
-      'Montserrat': [400, 600],
-      'Lato': [100, 300],
+      'Montserrat': [400, 500, 600],
+      'Koh Santepheap': [300, 400, 700],
     },
     display: 'swap',
     prefetch: true,

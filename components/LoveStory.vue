@@ -1,36 +1,21 @@
 <template>
-  <section
-    id="love-story"
-    class="py-20 font-[Inter,sans-serif] text-red-50"
-  >
+  <section id="love-story" class="py-20 font-body text-red-50">
     <div class="max-w-3xl mx-auto px-4">
       <h2
-        class="text-4xl font-bold font-heading text-center tracking-wide mb-12 text-red-100 border-b border-rose-500 pb-2"
-      >
+        class="text-4xl font-bold font-heading text-center tracking-wide mb-12 text-red-100 border-b border-rose-500 pb-2">
         {{ story?.title }}
       </h2>
       <div class="relative border-l-2 border-gradient-to-b pl-6 space-y-10">
-        <div
-          v-for="(event, idx) in timeline"
-          :key="idx"
-          data-aos="fade-up"
-          class="relative group"
-        >
+        <div v-for="(event, idx) in timeline" :key="idx" data-aos="fade-up" class="relative group">
           <!-- Timeline dot -->
           <div
-            class="absolute -left-4 top-0 w-8 h-8 bg-gradient-to-tr from-rose-400 to-pink-300 border-[3px] border-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-rose-200/30 group-hover:scale-110 transition-all duration-300 overflow-hidden z-10"
-          >
-            <img
-              :src="event.icon"
-              alt="Icon"
-              class="w-4 h-4 object-contain"
-            >
+            class="absolute -left-4 top-0 w-8 h-8 bg-gradient-to-tr from-rose-400 to-pink-300 border-[3px] border-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-rose-200/30 group-hover:scale-110 transition-all duration-300 overflow-hidden z-10">
+            <img :src="event.icon" alt="Icon" class="w-4 h-4 object-contain">
           </div>
 
           <!-- Content -->
           <div
-            class="bg-red-900/30 backdrop-blur-sm border border-rose-400/30 rounded-xl p-5 shadow-md hover:shadow-pink-500/30 transition duration-300"
-          >
+            class="bg-red-900/30 backdrop-blur-sm border border-rose-400/30 rounded-xl p-5 shadow-md hover:shadow-pink-500/30 transition duration-300">
             <p class="text-xs text-rose-300 font-semibold uppercase tracking-wide">
               {{ event.date }}
             </p>
@@ -45,19 +30,13 @@
 </template>
 
 <script setup>
-import { computed, onMounted } from 'vue'
-import AOS from 'aos'
-import 'aos/dist/aos.css'
+import { computed } from 'vue'
 
 const props = defineProps({
   story: {
     type: Object,
     default: null,
   },
-})
-
-onMounted(() => {
-  AOS.init({ duration: 800, once: true })
 })
 
 const timeline = computed(() => props.story?.timeline || [])

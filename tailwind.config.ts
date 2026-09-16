@@ -2,7 +2,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['Great Vibes', 'serif'],
+        heading: ['Great Vibes', 'cursive', 'serif'],
         second: ['Koh Santepheap', 'serif'],
         body: ['Montserrat', 'sans-serif'],
       },
