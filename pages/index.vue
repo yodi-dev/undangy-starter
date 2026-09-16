@@ -1,22 +1,22 @@
 <template>
-  <div class="bg-red-950 text-red-50">
-    <Landing v-if="!showInvitation" :couple="invitation.couple" :bg-image="invitation.assets.landingBg"
+  <ThemesMaroonShell>
+    <ThemesMaroonCover v-if="!showInvitation" :couple="invitation.couple" :bg-image="invitation.assets.landingBg"
       @open="showInvitation = true" />
 
     <template v-else>
-      <Countdown :couple="invitation.couple" :countdown="invitation.countdown"
+      <ThemesMaroonCountdown :couple="invitation.couple" :countdown="invitation.countdown"
         :bg-image="invitation.assets.countdownBg" />
-      <AyatArRum :quote="invitation.quote" />
-      <BrideGroom :couple="invitation.couple" />
-      <LoveStory :story="invitation.loveStory" />
-      <Event :events="invitation.events" />
-      <Gallery :gallery="invitation.gallery" />
-      <Gift :gift="invitation.gift" />
-      <BlessingForm />
-      <ThankYou :couple="invitation.couple" :closing="invitation.closing" />
-      <AudioPlayer :audio="invitation.audio" />
+      <ThemesMaroonQuote :quote="invitation.quote" />
+      <ThemesMaroonCouple :couple="invitation.couple" />
+      <ThemesMaroonStory :story="invitation.loveStory" />
+      <ThemesMaroonEvent :events="invitation.events" />
+      <ThemesMaroonGallery :gallery="invitation.gallery" />
+      <ThemesMaroonGift :gift="invitation.gift" />
+      <ThemesMaroonWishes />
+      <ThemesMaroonClosing :couple="invitation.couple" :closing="invitation.closing" />
+      <SharedAudioPlayer :audio="invitation.audio" />
     </template>
-  </div>
+  </ThemesMaroonShell>
 </template>
 
 <script setup>
