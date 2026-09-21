@@ -1,28 +1,36 @@
 <template>
-  <section ref="landingRef"
+  <section
+    ref="landingRef"
     class="relative flex flex-col justify-between items-center h-screen min-h-[600px] w-full overflow-hidden bg-no-repeat bg-cover bg-[center_75%] md:bg-[center_35%] transition-opacity duration-700 ease-out"
-    :style="{ backgroundImage: `url(${bgImage || '/images/landing.webp'})` }">
+    :style="{ backgroundImage: `url(${bgImage || '/images/landing.webp'})` }"
+  >
     <!-- Cinematic Deep Wine Overlay -->
     <div
-      class="absolute inset-0 bg-gradient-to-b from-[#2A0D14]/75 via-[#2A0D14]/30 to-[#2A0D14]/95 pointer-events-none z-0" />
+      class="absolute inset-0 bg-gradient-to-b from-[#2A0D14]/75 via-[#2A0D14]/30 to-[#2A0D14]/95 pointer-events-none z-0"
+    />
 
     <!-- Content: Editorial Layout -->
     <div
-      class="relative z-10 flex flex-col justify-between items-center h-full w-full max-w-xl mx-auto px-6 py-12 sm:py-16 md:py-20 text-center">
+      class="relative z-10 flex flex-col justify-between items-center h-full w-full max-w-xl mx-auto px-6 py-12 sm:py-16 md:py-20 text-center"
+    >
       <!-- Top / Header Block -->
       <div class="pt-4 sm:pt-6">
         <p
-          class="font-body text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.32em] text-[#F6EFE5]/80 anim-eyebrow">
+          class="font-body text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.32em] text-[#F6EFE5]/80 anim-eyebrow"
+        >
           {{ couple?.title || 'The Wedding Of' }}
         </p>
 
         <h1
-          class="font-serif text-5xl sm:text-6xl md:text-7xl font-normal text-[#F6EFE5] tracking-wide mt-3 mb-3 leading-tight anim-names">
+          class="font-serif text-5xl sm:text-6xl md:text-7xl font-normal text-[#F6EFE5] tracking-wide mt-3 mb-3 leading-tight anim-names"
+        >
           {{ couple?.shortName }}
         </h1>
 
-        <div v-if="formattedDate"
-          class="inline-flex items-center justify-center gap-2 font-body text-xs sm:text-sm tracking-[0.3em] text-[#C4A46C] uppercase anim-date">
+        <div
+          v-if="formattedDate"
+          class="inline-flex items-center justify-center gap-2 font-body text-xs sm:text-sm tracking-[0.3em] text-[#C4A46C] uppercase anim-date"
+        >
           <span>{{ formattedDate }}</span>
         </div>
       </div>
@@ -31,7 +39,8 @@
       <div class="w-full pb-4 sm:pb-6 space-y-4">
         <!-- Guest Box -->
         <div
-          class="w-full max-w-xs mx-auto py-3.5 px-5 rounded-sm bg-[#2A0D14]/45 backdrop-blur-sm border border-[#C4A46C]/30 shadow-sm anim-guest">
+          class="w-full max-w-xs mx-auto py-3.5 px-5 rounded-sm bg-[#2A0D14]/45 backdrop-blur-sm border border-[#C4A46C]/30 shadow-sm anim-guest"
+        >
           <p class="font-body text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-[#F6EFE5]/75 mb-1">
             Kepada Yth:
           </p>
@@ -44,12 +53,19 @@
         <div class="anim-cta">
           <button
             class="group inline-flex items-center justify-center gap-2.5 px-6 py-2.5 sm:px-7 sm:py-3 rounded-sm border border-[#C4A46C]/60 bg-[#2A0D14]/60 hover:bg-[#5A1724] hover:border-[#C4A46C] text-[#F6EFE5] font-body text-xs sm:text-sm font-medium tracking-[0.22em] uppercase transition-all duration-300 active:scale-[0.98] min-h-[44px]"
-            @click="openInvitation">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
-              class="size-4 text-[#C4A46C] transition-colors group-hover:text-[#F6EFE5]">
-              <path fill-rule="evenodd"
+            @click="openInvitation"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-4 text-[#C4A46C] transition-colors group-hover:text-[#F6EFE5]"
+            >
+              <path
+                fill-rule="evenodd"
                 d="M2.106 6.447A2 2 0 0 0 1 8.237V16a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.236a2 2 0 0 0-1.106-1.789l-7-3.5a2 2 0 0 0-1.788 0l-7 3.5Zm1.48 4.007a.75.75 0 0 0-.671 1.342l5.855 2.928a2.75 2.75 0 0 0 2.46 0l5.852-2.927a.75.75 0 1 0-.67-1.341l-5.853 2.926a1.25 1.25 0 0 1-1.118 0l-5.856-2.928Z"
-                clip-rule="evenodd" />
+                clip-rule="evenodd"
+              />
             </svg>
             <span>Buka Undangan</span>
           </button>

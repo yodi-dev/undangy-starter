@@ -12,18 +12,15 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       ],
       link: [
-        { rel: 'icon', type: 'image/png', href: '/images/favicon.ico' },
+        { rel: 'icon', type: 'image/png', href: '/images/favicon.svg' },
       ],
     },
   },
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.NUXT_PUBLIC_SUPABASE_URL
-        || process.env.NEXT_PUBLIC_SUPABASE_URL
         || '',
       supabaseKey: process.env.NUXT_PUBLIC_SUPABASE_KEY
-        || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-        || process.env.NEXT_PUBLIC_SUPABASE_KEY
         || '',
     },
   },

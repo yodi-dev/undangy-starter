@@ -56,6 +56,8 @@ export interface EventDetail {
   locationName: string
   address: string
   googleMapsEmbedUrl: string
+  googleMapsUrl?: string
+  entertainment?: string
 }
 
 export interface TimelineEvent {

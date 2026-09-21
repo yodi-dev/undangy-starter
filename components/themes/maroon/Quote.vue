@@ -1,5 +1,5 @@
 <template>
-  <section class="relative bg-[#F6EFE5] text-[#2C2021] py-20 sm:py-24 md:py-28 px-6 text-center transition-colors">
+  <section class="relative bg-[#521521] text-[#F6EFE5] py-20 sm:py-24 md:py-28 px-6 text-center transition-colors">
     <div class="relative max-w-2xl mx-auto">
       <!-- Top Subtle Ornament Divider -->
       <div
@@ -13,7 +13,7 @@
       </div>
 
       <figure>
-        <!-- Optional Icon (restrained, visible on Warm Ivory) -->
+        <!-- White Dove Asset (naturally visible on Maroon background) -->
         <div
           v-if="quote?.icon"
           class="mb-6 flex justify-center"
@@ -24,14 +24,14 @@
           <img
             :src="quote.icon"
             alt="Ikon Undangan"
-            class="w-8 h-8 object-contain opacity-50 filter brightness-90 contrast-125 saturate-125 drop-shadow-[0_1px_2px_rgba(0,0,0,0.15)]"
+            class="w-8 h-8 object-contain opacity-80 drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]"
             loading="lazy"
           >
         </div>
 
-        <!-- Editorial Verse Text -->
+        <!-- Editorial Verse Text in Warm Ivory -->
         <blockquote
-          class="font-serif text-lg sm:text-xl md:text-2xl font-normal leading-relaxed text-[#2C2021] italic max-w-xl mx-auto px-2"
+          class="font-serif text-lg sm:text-xl md:text-2xl font-normal leading-relaxed text-[#F6EFE5] italic max-w-xl mx-auto px-2"
           data-aos="fade-up"
           data-aos-duration="900"
           data-aos-delay="200"
@@ -39,9 +39,9 @@
           "{{ quote?.text }}"
         </blockquote>
 
-        <!-- Source Reference -->
+        <!-- Source Reference in Champagne Gold Accent -->
         <figcaption
-          class="font-body text-xs sm:text-sm text-[#5A1724] font-medium tracking-[0.25em] uppercase mt-8"
+          class="font-body text-xs sm:text-sm text-[#C4A46C] font-medium tracking-[0.25em] uppercase mt-8"
           data-aos="fade-in"
           data-aos-duration="800"
           data-aos-delay="300"

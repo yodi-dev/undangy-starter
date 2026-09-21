@@ -1,40 +1,60 @@
 <template>
   <section
     id="love-story"
-    class="py-20 font-body text-red-50"
+    class="relative bg-[#4A141E] text-[#F6EFE5] py-20 sm:py-24 md:py-28 px-6 transition-colors"
   >
-    <div class="max-w-3xl mx-auto px-4">
-      <h2
-        class="text-4xl font-bold font-heading text-center tracking-wide mb-12 text-red-100 border-b border-rose-500 pb-2"
+    <div class="max-w-2xl mx-auto">
+      <!-- Top Subtle Ornament Divider in Champagne -->
+      <div
+        class="flex items-center justify-center gap-3 text-[#C4A46C]/70 mb-6"
+        data-aos="fade-in"
+        data-aos-duration="800"
       >
-        {{ story?.title }}
-      </h2>
-      <div class="relative border-l-2 border-gradient-to-b pl-6 space-y-10">
+        <div class="h-px w-10 sm:w-16 bg-[#C4A46C]/40" />
+        <span class="text-[10px] tracking-widest text-[#C4A46C]">◆</span>
+        <div class="h-px w-10 sm:w-16 bg-[#C4A46C]/40" />
+      </div>
+
+      <!-- Section Eyebrow & Title in Warm Ivory -->
+      <div class="text-center mb-16 sm:mb-20">
+        <span
+          class="font-body text-[10px] sm:text-xs tracking-[0.25em] uppercase text-[#C4A46C] font-medium block mb-2"
+          data-aos="fade-up"
+          data-aos-duration="800"
+        >
+          Our Journey
+        </span>
+        <h2
+          class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#F6EFE5] font-normal tracking-wide"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          data-aos-delay="100"
+        >
+          {{ story?.title || 'Love Story' }}
+        </h2>
+      </div>
+
+      <!-- Editorial Timeline on Muted Maroon -->
+      <div class="relative max-w-xl mx-auto pl-8 sm:pl-10 border-l border-[#C4A46C]/40 space-y-12 sm:space-y-16">
         <div
           v-for="(event, idx) in timeline"
           :key="idx"
-          data-aos="fade-up"
           class="relative group"
+          data-aos="fade-up"
+          data-aos-duration="800"
+          :data-aos-delay="150 + idx * 100"
         >
-          <!-- Timeline dot -->
+          <!-- Timeline Diamond Node -->
           <div
-            class="absolute -left-4 top-0 w-8 h-8 bg-gradient-to-tr from-rose-400 to-pink-300 border-[3px] border-white rounded-full flex items-center justify-center shadow-lg ring-2 ring-rose-200/30 group-hover:scale-110 transition-all duration-300 overflow-hidden z-10"
-          >
-            <img
-              :src="event.icon"
-              alt="Icon"
-              class="w-4 h-4 object-contain"
-            >
-          </div>
+            class="absolute -left-[37px] sm:-left-[45px] top-1.5 w-3 h-3 rotate-45 border border-[#C4A46C] bg-[#4A141E] transition-colors duration-300 group-hover:bg-[#C4A46C]"
+          />
 
-          <!-- Content -->
-          <div
-            class="bg-red-900/30 backdrop-blur-sm border border-rose-400/30 rounded-xl p-5 shadow-md hover:shadow-pink-500/30 transition duration-300"
-          >
-            <p class="text-xs text-rose-300 font-semibold uppercase tracking-wide">
+          <!-- Milestone Content with Clear Contrast -->
+          <div>
+            <h3 class="font-serif text-xl sm:text-2xl text-[#F6EFE5] font-normal tracking-wide">
               {{ event.date }}
-            </p>
-            <p class="text-red-50 font-body text-base mt-2 leading-relaxed">
+            </h3>
+            <p class="font-body text-xs sm:text-sm text-[#F6EFE5]/85 leading-relaxed mt-2.5">
               {{ event.description }}
             </p>
           </div>
@@ -56,11 +76,3 @@ const props = defineProps({
 
 const timeline = computed(() => props.story?.timeline || [])
 </script>
-
-<style scoped>
-.border-gradient-to-b {
-  border-image: linear-gradient(to bottom, #fb7185, #fecdd3);
-  /* rose to soft pink */
-  border-image-slice: 1;
-}
-</style>
