@@ -131,12 +131,32 @@ export const invitation: InvitationData = {
   audio: {
     src: '/audio/bg-music.mp3',
   },
+  turutMengundang: {
+    title: 'Turut Mengundang',
+    subTitle: 'Merupakan suatu kehormatan dan kebahagiaan bagi kami sekeluarga, apabila Bapak/Ibu/Saudara/i berkenan hadir dan memberikan doa restu kepada kedua mempelai.',
+    categories: [
+      {
+        title: 'Muda-mudi',
+        names: [
+          'Ita Nopilia',
+          'Fira Mahesa',
+          'Desy Rosdiana',
+          'Atika Marzela',
+          'Netta Forten',
+          'Pipit Sulastri',
+          'Aprilia Arinda Putri',
+          'Sintia Oktarina',
+          'Ajeng Anggraini',
+        ],
+      },
+    ],
+  },
   closing: {
     title: 'Terima Kasih',
     message: 'Terima kasih atas doa dan restu yang telah diberikan kepada kami. Semoga cinta dan kebahagiaan selalu menyertai langkah kita semua.',
     coupleText: 'Kami yang berbahagia',
     photo: '/images/closing.webp',
-    musicAttribution: 'Musik: "You\'ll Be in My Heart" - Niki – Phil Collins.\nDigunakan untuk kepentingan non-komersial.',
+    musicAttribution: 'Musik: "You\'ll Be in My Heart" - Niki.',
     iconAttribution: {
       text: 'Ikon oleh',
       author: 'Freepik',
@@ -144,8 +164,8 @@ export const invitation: InvitationData = {
     },
     developerCredit: {
       text: 'Made with ♥ by',
-      author: 'awan-dev.site',
-      url: 'https://awan-dev.site',
+      author: 'awanbeo.my.id',
+      url: 'https://awanbeo.my.id',
     },
   },
 }

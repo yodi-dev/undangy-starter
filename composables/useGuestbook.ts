@@ -27,7 +27,7 @@ export function useGuestbook() {
     try {
       const client = getSupabaseClient()
       const { data, error: fetchError } = await client
-        .from('guestbook')
+        .from('guestbook_ella')
         .select('*')
         .order('created_at', { ascending: false })
 
@@ -57,7 +57,7 @@ export function useGuestbook() {
     try {
       const client = getSupabaseClient()
       const { error: insertError } = await client
-        .from('guestbook')
+        .from('guestbook_ella')
         .insert([{
           name: entry.name,
           attending: entry.attending,

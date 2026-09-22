@@ -98,6 +98,18 @@ export interface AudioConfig {
   src: string
 }
 
+export interface InviteeCategory {
+  title?: string
+  names: string[]
+}
+
+export interface TurutMengundangConfig {
+  title?: string
+  subTitle?: string
+  categories?: InviteeCategory[]
+  names?: string[]
+}
+
 export interface ClosingConfig {
   title: string
   message: string
@@ -127,5 +139,6 @@ export interface InvitationData {
   gallery: GalleryConfig
   gift: GiftConfig
   audio: AudioConfig
+  turutMengundang?: TurutMengundangConfig
   closing: ClosingConfig
 }
