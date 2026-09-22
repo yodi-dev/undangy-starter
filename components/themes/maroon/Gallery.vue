@@ -1,82 +1,161 @@
 <template>
-  <section
-    id="gallery"
-    class="py-20 font-body bg-gradient-to-b from-red-950 to-white"
-  >
-    <h2 class="text-4xl font-bold font-heading text-center mb-12 tracking-wide">
-      {{ gallery?.title }}
-    </h2>
-    <div class="max-w-6xl mx-auto px-4">
-      <!-- Portrait Carousel -->
-      <Splide
-        :options="{
-          type: 'loop',
-          autoplay: true,
-          interval: 3000,
-          arrows: false,
-          pagination: false,
-          drag: true,
-          gap: '1rem',
-        }"
-        class="w-full"
-      >
-        <SplideSlide
-          v-for="(group, index) in portraitSlides"
-          :key="index"
-        >
-          <div class="flex gap-2">
+  <section id="gallery" class="relative bg-[#F6EFE5] text-[#2C2021] py-20 sm:py-24 md:py-28 px-6 transition-colors">
+    <div class="max-w-5xl mx-auto">
+      <!-- Top Subtle Ornament Divider -->
+      <div class="flex items-center justify-center gap-3 text-[#C4A46C]/70 mb-6" data-aos="fade-in"
+        data-aos-duration="800">
+        <div class="h-px w-10 sm:w-16 bg-[#C4A46C]/40" />
+        <span class="text-[10px] tracking-widest text-[#C4A46C]">◆</span>
+        <div class="h-px w-10 sm:w-16 bg-[#C4A46C]/40" />
+      </div>
+
+      <!-- Section Header -->
+      <div class="text-center mb-14 sm:mb-18">
+        <span class="font-heading text-2xl sm:text-3xl text-[#C4A46C] block mb-2" data-aos="fade-up"
+          data-aos-duration="800">
+          Our Moments
+        </span>
+        <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl text-[#5A1724] font-normal tracking-wide"
+          data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+          {{ gallery?.title || 'Galeri Kami' }}
+        </h2>
+      </div>
+
+      <!-- EDITORIAL ALBUM COMPOSITION (Varied Rhythm & Visual Scales) -->
+      <div class="space-y-6 sm:space-y-8">
+        <!-- 1. Opening Asymmetric Feature Spread (Hero Portrait + Stacked Duo) -->
+        <div v-if="heroImage" class="grid grid-cols-1 md:grid-cols-12 gap-4 sm:gap-6 items-stretch" data-aos="fade-up"
+          data-aos-duration="800" data-aos-delay="150">
+          <!-- Dominant Grand Hero Portrait -->
+          <div
+            class="md:col-span-7 relative overflow-hidden rounded-sm border border-[#C4A46C]/35 shadow-[0_4px_24px_rgba(42,13,20,0.07)] cursor-pointer group aspect-[3/4] sm:aspect-[4/5] bg-[#EDE0D0]/50"
+            @click="showLightbox(getGlobalIndex(heroImage))">
+            <img loading="lazy" :src="heroImage.src" :alt="heroImage.alt"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
             <div
-              v-for="(img, i) in group"
-              :key="i"
-              :class="[
-                'overflow-hidden shadow-md group cursor-pointer transition-all rounded-lg',
-                group.length === 1 ? 'w-full' : 'w-1/2',
-              ]"
-              @click="showLightboxFromPortrait(index * 2 + i)"
-            >
-              <img
-                loading="lazy"
-                :src="img.src"
-                :alt="img.alt"
-                class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-105"
-              >
+              class="absolute inset-0 bg-[#2A0D14]/0 group-hover:bg-[#2A0D14]/15 transition-colors duration-300 pointer-events-none" />
+            <div class="absolute inset-0 ring-1 ring-inset ring-[#C4A46C]/20 pointer-events-none" />
+            <div
+              class="absolute bottom-3 left-3 bg-[#2A0D14]/65 backdrop-blur-xs px-2.5 py-1 rounded-xs border border-[#C4A46C]/30 text-[10px] font-body uppercase tracking-[0.2em] text-[#F6EFE5]">
+              Featured
             </div>
           </div>
-        </SplideSlide>
-      </Splide>
 
-      <vue-easy-lightbox
-        :visible="lightbox.visible"
-        :imgs="portraitImages.map(i => i.src)"
-        :index="lightbox.index"
-        @hide="lightbox.visible = false"
-      />
-
-      <!-- Landscape Section -->
-      <div class="mt-4">
-        <div class="columns-1 sm:columns-2 gap-4 space-y-4">
-          <div
-            v-for="(img, index) in landscapeImages"
-            :key="index"
-            class="overflow-hidden rounded-lg shadow-md group cursor-pointer break-inside-avoid"
-            @click="showLightboxFromLandscape(index)"
-          >
-            <img
-              loading="lazy"
-              :src="img.src"
-              :alt="img.alt"
-              class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105 group-hover:brightness-105"
-            >
+          <!-- Stacked Curated Duo on Right Column -->
+          <div v-if="duoImages.length" class="md:col-span-5 grid grid-cols-2 md:grid-cols-1 gap-4 sm:gap-6">
+            <div v-for="(img, idx) in duoImages" :key="idx"
+              class="relative overflow-hidden rounded-sm border border-[#C4A46C]/35 shadow-[0_4px_20px_rgba(42,13,20,0.06)] cursor-pointer group aspect-[3/4] md:aspect-[4/3] bg-[#EDE0D0]/50"
+              @click="showLightbox(getGlobalIndex(img))">
+              <img loading="lazy" :src="img.src" :alt="img.alt"
+                class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+              <div
+                class="absolute inset-0 bg-[#2A0D14]/0 group-hover:bg-[#2A0D14]/15 transition-colors duration-300 pointer-events-none" />
+              <div class="absolute inset-0 ring-1 ring-inset ring-[#C4A46C]/20 pointer-events-none" />
+            </div>
           </div>
+        </div>
+
+        <!-- 2. Cinematic Panoramic Focus Crop (Breaks the vertical-only monotony) -->
+        <div v-if="bannerImage"
+          class="relative overflow-hidden rounded-sm border border-[#C4A46C]/35 shadow-[0_4px_24px_rgba(42,13,20,0.07)] cursor-pointer group w-full aspect-[16/8] sm:aspect-[21/9] bg-[#EDE0D0]/50"
+          data-aos="fade-up" data-aos-duration="800" data-aos-delay="200"
+          @click="showLightbox(getGlobalIndex(bannerImage))">
+          <img loading="lazy" :src="bannerImage.src" :alt="bannerImage.alt"
+            class="w-full h-full object-cover object-[center_35%] transition-transform duration-700 ease-out group-hover:scale-105">
+          <div
+            class="absolute inset-0 bg-gradient-to-t from-[#2A0D14]/60 via-transparent to-transparent pointer-events-none" />
+          <div class="absolute inset-0 ring-1 ring-inset ring-[#C4A46C]/20 pointer-events-none" />
+          <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 text-[#F6EFE5]">
+            <span class="font-heading text-lg sm:text-2xl text-[#C4A46C] block leading-none">
+              Forever &amp; Always
+            </span>
+            <p class="font-serif italic text-xs sm:text-sm text-[#F6EFE5]/90 tracking-widest uppercase mt-1">
+              Sebuah Cerita Dalam Bingkai
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Staggered Editorial Triptych (Dynamic Rhythmic Heights) -->
+        <div v-if="triptychImages.length" class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 items-center"
+          data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+          <div v-for="(img, idx) in triptychImages" :key="idx" :class="[
+            'relative overflow-hidden rounded-sm border border-[#C4A46C]/35 shadow-[0_4px_20px_rgba(42,13,20,0.06)] cursor-pointer group bg-[#EDE0D0]/50 transition-all duration-300',
+            idx === 1
+              ? 'aspect-[4/5] sm:scale-[1.02] sm:border-[#C4A46C]/50 shadow-md sm:-translate-y-2'
+              : 'aspect-[3/4]',
+          ]" @click="showLightbox(getGlobalIndex(img))">
+            <img loading="lazy" :src="img.src" :alt="img.alt"
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+            <div
+              class="absolute inset-0 bg-[#2A0D14]/0 group-hover:bg-[#2A0D14]/15 transition-colors duration-300 pointer-events-none" />
+            <div class="absolute inset-0 ring-1 ring-inset ring-[#C4A46C]/20 pointer-events-none" />
+          </div>
+        </div>
+
+        <!-- 4. Interactive Editorial Filmstrip Reel (Splide Continuous Slider) -->
+        <div v-if="carouselImages.length" class="pt-6 sm:pt-8" data-aos="fade-up" data-aos-duration="800"
+          data-aos-delay="250">
+          <div class="flex items-center justify-between mb-3 px-1">
+            <span class="font-body text-[10px] sm:text-xs uppercase tracking-[0.25em] text-[#772638] font-semibold">
+              Film Reel Moments
+            </span>
+            <span class="font-body text-[10px] sm:text-xs text-[#2C2021]/60 tracking-wider">
+              Geser untuk melihat &rarr;
+            </span>
+          </div>
+
+          <Splide :options="{
+            type: 'loop',
+            autoplay: true,
+            interval: 3200,
+            perPage: 3,
+            gap: '1rem',
+            arrows: false,
+            pagination: false,
+            drag: true,
+            speed: 700,
+            breakpoints: {
+              768: {
+                perPage: 2,
+                gap: '0.75rem',
+              },
+              540: {
+                perPage: 1.35,
+                gap: '0.75rem',
+              },
+            },
+          }" class="w-full">
+            <SplideSlide v-for="(img, idx) in carouselImages" :key="idx">
+              <div
+                class="relative overflow-hidden rounded-sm border border-[#C4A46C]/35 shadow-[0_4px_18px_rgba(42,13,20,0.06)] cursor-pointer group aspect-[3/4] bg-[#EDE0D0]/50"
+                @click="showLightbox(getGlobalIndex(img))">
+                <img loading="lazy" :src="img.src" :alt="img.alt"
+                  class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105">
+                <div
+                  class="absolute inset-0 bg-[#2A0D14]/0 group-hover:bg-[#2A0D14]/15 transition-colors duration-300 pointer-events-none" />
+                <div class="absolute inset-0 ring-1 ring-inset ring-[#C4A46C]/20 pointer-events-none" />
+              </div>
+            </SplideSlide>
+          </Splide>
+        </div>
+
+        <!-- 5. View Fullscreen Lightbox Button -->
+        <div class="text-center pt-8" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
+          <button type="button"
+            class="inline-flex items-center gap-2 border border-[#C4A46C]/60 hover:bg-[#5A1724] hover:border-[#5A1724] hover:text-[#F6EFE5] text-[#5A1724] font-body text-xs uppercase tracking-[0.2em] px-6 py-3 rounded-full transition-all duration-300 shadow-sm cursor-pointer active:scale-[0.98]"
+            @click="showLightbox(0)">
+            <svg class="w-4 h-4 text-[#C4A46C]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+            </svg>
+            <span>Lihat Semua Foto ({{ allGalleryImages.length }})</span>
+          </button>
         </div>
       </div>
 
-      <vue-easy-lightbox
-        :visible="landscapeLightbox.visible"
-        :imgs="landscapeImages.map(i => i.src)"
-        :index="landscapeLightbox.index"
-        @hide="landscapeLightbox.visible = false"
-      />
+      <!-- Unified Fullscreen Lightbox -->
+      <vue-easy-lightbox :visible="lightbox.visible" :imgs="allImages" :index="lightbox.index"
+        @hide="lightbox.visible = false" />
     </div>
   </section>
 </template>
@@ -94,27 +173,42 @@ const props = defineProps({
   },
 })
 
-const portraitImages = computed(() => props.gallery?.portrait || [])
-const landscapeImages = computed(() => props.gallery?.landscape || [])
-
-const portraitSlides = computed(() => {
-  const slides = []
-  const list = portraitImages.value
-  for (let i = 0; i < list.length; i += 2) {
-    slides.push(list.slice(i, i + 2))
-  }
-  return slides
+const allGalleryImages = computed(() => {
+  const p = props.gallery?.portrait || []
+  const l = props.gallery?.landscape || []
+  return [...p, ...l]
 })
 
-const lightbox = ref({ visible: false, index: 0 })
-const showLightboxFromPortrait = (index) => {
-  lightbox.value.index = index
-  lightbox.value.visible = true
+const allImages = computed(() => allGalleryImages.value.map(i => i.src))
+
+// 1. Opening Feature: Hero (0) + Stacked Duo (1, 2)
+const heroImage = computed(() => allGalleryImages.value[0])
+const duoImages = computed(() => allGalleryImages.value.slice(1, 3))
+
+// 2. Panoramic Interlude: Banner (3)
+const bannerImage = computed(() => allGalleryImages.value[3])
+
+// 3. Staggered Triptych: (4, 5, 6)
+const triptychImages = computed(() => allGalleryImages.value.slice(4, 7))
+
+// 4. Filmstrip Carousel: (7 onwards, or all images if fewer)
+const carouselImages = computed(() => {
+  if (allGalleryImages.value.length > 7) {
+    return allGalleryImages.value.slice(7)
+  }
+  return allGalleryImages.value
+})
+
+const getGlobalIndex = (img) => {
+  if (!img) return 0
+  const idx = allGalleryImages.value.findIndex(item => item.src === img.src)
+  return idx >= 0 ? idx : 0
 }
 
-const landscapeLightbox = ref({ visible: false, index: 0 })
-const showLightboxFromLandscape = (index) => {
-  landscapeLightbox.value.index = index
-  landscapeLightbox.value.visible = true
+const lightbox = ref({ visible: false, index: 0 })
+
+const showLightbox = (index) => {
+  lightbox.value.index = index
+  lightbox.value.visible = true
 }
 </script>

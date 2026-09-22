@@ -98,19 +98,18 @@ export const invitation: InvitationData = {
   gallery: {
     title: 'Galeri Kami',
     portrait: [
+      { src: '/images/1.webp', alt: 'Potret Mempelai' },
       { src: '/images/2.webp', alt: 'Potret Mempelai' },
       { src: '/images/3.webp', alt: 'Potret Mempelai' },
       { src: '/images/4.webp', alt: 'Potret Mempelai' },
       { src: '/images/5.webp', alt: 'Potret Mempelai' },
       { src: '/images/6.webp', alt: 'Potret Mempelai' },
-      { src: '/images/10.webp', alt: 'Potret Mempelai' },
-      { src: '/images/13.webp', alt: 'Potret Mempelai' },
-      { src: '/images/14.webp', alt: 'Potret Mempelai' },
-    ],
-    landscape: [
-      { src: '/images/1.webp', alt: 'Potret Mempelai' },
       { src: '/images/7.webp', alt: 'Potret Mempelai' },
       { src: '/images/8.webp', alt: 'Potret Mempelai' },
+      { src: '/images/9.webp', alt: 'Potret Mempelai' },
+      { src: '/images/10.webp', alt: 'Potret Mempelai' },
+      { src: '/images/11.webp', alt: 'Potret Mempelai' },
+      { src: '/images/12.webp', alt: 'Potret Mempelai' },
     ],
   },
   gift: {
@@ -118,9 +117,14 @@ export const invitation: InvitationData = {
     message: 'Doa dan restu Anda adalah hadiah terbaik. Namun jika berkenan berbagi kasih, berikut adalah informasi rekening kami:',
     banks: [
       {
-        name: 'Bank BCA',
-        account: '7455190011',
-        owner: 'Desti Amalia',
+        name: 'Bank BRI',
+        account: '760701013298538',
+        owner: 'Asnani',
+      },
+      {
+        name: 'Dana',
+        account: '082281978957',
+        owner: 'Sehla Marsela',
       },
     ],
   },
@@ -131,7 +135,7 @@ export const invitation: InvitationData = {
     title: 'Terima Kasih',
     message: 'Terima kasih atas doa dan restu yang telah diberikan kepada kami. Semoga cinta dan kebahagiaan selalu menyertai langkah kita semua.',
     coupleText: 'Kami yang berbahagia',
-    photo: '/images/3.webp',
+    photo: '/images/closing.webp',
     musicAttribution: 'Musik: "You\'ll Be in My Heart" - Niki – Phil Collins.\nDigunakan untuk kepentingan non-komersial.',
     iconAttribution: {
       text: 'Ikon oleh',

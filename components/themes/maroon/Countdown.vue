@@ -16,7 +16,7 @@
     <!-- Two-Zone Fullscreen Layout: Atas & Bawah -->
     <div class="relative z-10 h-full w-full max-w-xl mx-auto px-6 flex flex-col justify-between items-center">
       <!-- BAGIAN ATAS: Save The Date & Main Date -->
-      <div class="pt-24 sm:pt-12 md:pt-14 flex flex-col items-center">
+      <div class="pt-20 sm:pt-8 md:pt-8 flex flex-col items-center">
         <p
           class="font-body text-md sm:text-sm uppercase tracking-[0.35em] text-[#F6EFE5]/90 mb-2"
           style="text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);"
@@ -67,7 +67,7 @@
       </div>
 
       <!-- BAGIAN BAWAH: Countdown Units & Supporting Date -->
-      <div class="pb-24 sm:pb-9 md:pb-11 flex flex-col items-center space-y-3 sm:space-y-4">
+      <div class="pb-20 sm:pb-4 md:pb-4 flex flex-col items-center space-y-3 sm:space-y-4">
         <!-- Card-less Stationery Countdown Units -->
         <div
           class="flex items-center justify-center gap-2.5 sm:gap-5 md:gap-7"
